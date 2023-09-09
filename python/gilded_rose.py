@@ -2,9 +2,11 @@
 
 class GildedRose(object):
 
+    # Default constructor
     def __init__(self, items):
         self.items = items
 
+    # Maintains and updates quality for all items
     def update_quality(self):
         for item in self.items:
             if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert":
@@ -35,7 +37,7 @@ class GildedRose(object):
                     if item.quality < 50:
                         item.quality = item.quality + 1
 
-
+# Default constructor
 class Item:
     def __init__(self, name, sell_in, quality):
         self.name = name
