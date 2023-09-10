@@ -3,6 +3,27 @@ from __future__ import print_function
 
 from gilded_rose import *
 
+import sys
+
+
+def simulator(args=None):
+    days = 2
+    if args and len(args) > 1:
+        try:
+            days = int(args[1]) + 1
+        except ValueError:
+            raise ValueError("Please provide a valid integer value for days.")
+
+    for day in range(days):
+        print("-------- day %s --------" % day)
+        print("name, sellIn, quality")
+        print("------------------------")
+        for item in items:
+            print(item)
+        print("")
+        GildedRose(items).update_quality()
+
+
 if __name__ == "__main__":
     print ("OMGHAI!")
     items = [
@@ -17,15 +38,4 @@ if __name__ == "__main__":
              Item(name="Conjured Mana Cake", sell_in=3, quality=6),  # <-- :O
             ]
 
-    days = 2
-    import sys
-    if len(sys.argv) > 1:
-        days = int(sys.argv[1]) + 1
-    for day in range(days):
-        print("-------- day %s --------" % day)
-        print("name, sellIn, quality")
-        print("-----------------------")
-        for item in items:
-            print(item)
-        print("")
-        GildedRose(items).update_quality()
+    simulator(sys.argv)
