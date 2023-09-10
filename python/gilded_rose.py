@@ -9,14 +9,10 @@ class GildedRose(object):
     # Maintains and updates quality for all items
     def update_quality(self):
         for item in self.items:
-            # Sulfuras
-            if item.name == "Sulfuras, Hand of Ragnaros":
-                continue
-
             # Aged Brie
-            elif item.name == "Aged Brie":
+            if item.name == "Aged Brie":
                 item.quality += 1
-                if item.sell_in <= 0:  # If the sell by date has passed
+                if item.sell_in <= 0:
                     item.quality += 1
 
             # Backstage passes
@@ -42,15 +38,21 @@ class GildedRose(object):
                 if item.sell_in <= 0:
                     item.quality -= 1
 
-            # Quality restriction
-            if item.quality < 0:
-                item.quality = 0
-            elif item.quality > 50:
-                item.quality = 50
+            if "Sulfuras" not in item.name:
+                # Decrement # of days to sell the item
+                item.sell_in -= 1
 
-            # Decrement # of days to sell the item
-            item.sell_in -= 1
-         
+                # Quality restriction
+                if item.quality < 0:
+                    item.quality = 0
+                elif item.quality > 50:
+                    item.quality = 50
+            # Special case for Sulfuras
+            else:
+                if item.sell_in <= 0:
+                    item.sell_in = 0
+                item.quality = 80
+    
 # Default constructor
 class Item:
     def __init__(self, name, sell_in, quality):
