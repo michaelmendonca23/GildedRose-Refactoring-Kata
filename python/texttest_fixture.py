@@ -24,6 +24,7 @@ if __name__ == "__main__":
     for day in range(days):
         print("-------- day %s --------" % day)
         print("name, sellIn, quality")
+        print("-----------------------")
         for item in items:
             print(item)
         print("")
